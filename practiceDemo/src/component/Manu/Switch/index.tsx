@@ -14,7 +14,7 @@ const Switch= ({switchItem}:SwitchProps):ReactElement => {
                 </li>
             })} */}
             <li>
-                <a href="#" className="manu_switch_link">
+                <a href="#" className="manu_switch_link selected">
                     <span className="manu_switch_item">
                         控制面板
                     </span>

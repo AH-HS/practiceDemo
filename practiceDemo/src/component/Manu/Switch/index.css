@@ -3,13 +3,31 @@
     justify-content: center;
     list-style: none;
     width: 88%;
+    
+}
+.manu_switch li{
+    position: relative;
 }
 .manu_switch_link{
     text-decoration: none;
     text-decoration-line: none;
+
 }
-.manu_switch_linkselection .selected{
+a{
+    line-height: 60px;
+}
+a.selected{
     color: #12c48b;
+}
+a.selected::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    opacity: 1;
+    background-color: #12c48b;
 }
 .manu_switch_item{
     padding: 0 10px;
