@@ -1,0 +1,18 @@
+.manu_switch{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    width: 88%;
+}
+.manu_switch_link{
+    text-decoration: none;
+    text-decoration-line: none;
+}
+.manu_switch_linkselection .selected{
+    color: #12c48b;
+}
+.manu_switch_item{
+    padding: 0 10px;
+    font-weight: 600;
+    line-height: 60px;
+}
