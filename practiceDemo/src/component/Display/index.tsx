@@ -1,4 +1,5 @@
 import { ReactElement } from "react";   
+import './index.css'
 
 interface DisplayProps {
     title:string

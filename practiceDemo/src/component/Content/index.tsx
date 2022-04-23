@@ -6,8 +6,37 @@ const Content= ():ReactElement => {
     return ( 
         <div className="content">
             <Display title="钱包">
-                <div>
-                    图表
+                <div className="qb">
+                    <div className="qb_item">
+                        <div className="qb_item_con">
+                            1241321
+                        </div>
+                    </div>
+                    <div className="qb_item">
+                        <div className="qb_item_con">
+                            1241321
+                        </div>
+                    </div>
+                    <div className="qb_item">
+                        <div className="qb_item_con">
+                            1241321
+                        </div>
+                    </div>
+                    <div className="qb_item">
+                        <div className="qb_item_con">
+                            1241321
+                        </div>
+                    </div>
+                    <div className="qb_item">
+                        <div className="qb_item_con">
+                            1241321
+                        </div>
+                    </div>
+                    <div className="qb_item">
+                        <div className="qb_item_con">
+                            1241321
+                        </div>
+                    </div>
                 </div>
             </Display>
             <Display title="概览">
