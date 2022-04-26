@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import "./index.css"
 import logo from './img/logo.png'
 import Switch from './Switch'
+import Profile from './Profile'
 
 interface ManuProps {
     children?:ReactElement
@@ -13,6 +14,7 @@ const Manu = ({children}:ManuProps):ReactElement => {
             <img src={logo} alt="logo" />
             {children}
             <Switch />
+            <Profile />
         </header>
     );
 }

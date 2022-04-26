@@ -1,0 +1,25 @@
+.profile_container{
+    display: flex;
+    height: 100%;
+    padding-right: 20px;
+    flex-shrink: 0;
+}
+.imgwrap{
+    display: flex;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+.profile_container img{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.profile_name{
+    min-width:180px;
+}
+.profile_name span:first-child{
+    vertical-align: center;
+    font-weight: 600;
+}

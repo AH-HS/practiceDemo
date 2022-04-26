@@ -20,3 +20,27 @@
     border-radius: 8px;
     background-color: rgb(255, 255, 255);
 }
+.datepicker{
+    padding: 30px 0 ;
+    display: flex;
+    flex: content;
+    justify-content: flex-end;
+}
+.datepicker div:first-child{
+    padding-right: 20px;
+}
+.gl_items{
+    display: flex;
+}
+.gl_item{
+    width: 25%;
+    background-color: white;
+    /* height: ; */
+    padding: 15px;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+.gl_item span{
+    color: #2dba75;
+    font-size: 24px;
+}
