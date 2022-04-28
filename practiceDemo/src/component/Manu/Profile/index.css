@@ -1,25 +1,87 @@
 .profile_container{
-    display: flex;
+    /* display: flex; */
     height: 100%;
     padding-right: 20px;
     flex-shrink: 0;
+    position: relative;
 }
 .imgwrap{
     display: flex;
     padding: 10px 0;
-    display: flex;
     align-items: center;
+    background-color: white;
 }
-.profile_container img{
+
+.profile_name span:first-child{
+    vertical-align: center;
+    font-weight: 600;
+}
+
+
+.Pcontainer{
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    padding-right: 20px;
+}
+.drapdown_wrap{
+    cursor: pointer;
+}
+.drapdown_wrap>div:first-child{
+    position: relative;
+    width: 100%;
+    z-index: 800;
+}
+.imgwrap{
+    padding: 10px;
+    border-radius: 5px 5px  0 0;
+}
+.imgwrap img{
     width: 34px;
     height: 34px;
     border-radius: 50%;
     margin-right: 10px;
 }
-.profile_name{
-    min-width:180px;
+.drap_nlist{
+    max-height: 0;
+    overflow: hidden;
+    /* transition: 1s ; */
 }
-.profile_name span:first-child{
-    vertical-align: center;
+.drap_list{
+    position: absolute;
+    overflow: hidden;
+    max-height: 500px;
+    width: 100%;
+    background-color: white;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 8px 0 rgb(48 82 120 / 16%);
+    transition: max-height 1s;
+}
+.drap_list a{
+    line-height: 36px;
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
     font-weight: 600;
+    text-align: left;
+    font-size: 14px;
+}
+.drap_list a:hover{
+    color: #12c48b;
+}
+.drap_nbg{
+    visibility: hidden;
+}
+.drap_bg{
+    visibility:visible;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    height: 180%;
+    background-color: black;
+    opacity: .6;
+    cursor: auto;
 }

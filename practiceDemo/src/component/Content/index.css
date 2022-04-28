@@ -40,6 +40,10 @@
     margin-right: 20px;
     border-radius: 5px;
 }
+.gl_item h4{
+    font-size: 16px;
+    font-weight: 600;
+}
 .gl_item span{
     color: #2dba75;
     font-size: 24px;
