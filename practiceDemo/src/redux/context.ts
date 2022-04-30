@@ -72,8 +72,21 @@ export const reducers = (state:RETURNTYPE,action:ACTIONTYPE):RETURNTYPE=>{
         case ADD_LOG:
             console.log("添加一条记录");
             const newdealLog = [...state.dealLog];
+
             if(typeof data === "object"){
+                const changeValue = Number(data.value);
+                const spendValue = changeValue<0?changeValue:0;
+                const incomeValue = changeValue>0?changeValue:0;
+                const change = changeValue;
+                const newTotal = {
+                    ...state.total,
+                    count:state.total.count+changeValue,
+                    spend:state.total.spend+spendValue,
+                    income:state.total.income+incomeValue,
+                    change:state.total.change+change,
+                }
                 newdealLog.push(data)
+                return {...state,total:newTotal,dealLog:newdealLog}
             }
             console.log("执行了")
             return {...state,dealLog:newdealLog}

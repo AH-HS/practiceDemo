@@ -143,32 +143,32 @@ const Content= ():ReactElement => {
                         <div className="gl_item_wrap">
                             <div className="gl_item">
                                 <h4>总余额</h4>
-                                <span>
-                                    0.00 CNY
+                                <span className={state.total.count>=0?"pos":"neg"}>
+                                    {state.total.count.toFixed(2)+" "+state.total.unit}
                                 </span>
                             </div>
                         </div>
                         <div className="gl_item_wrap">
                             <div className="gl_item">
                                 <h4>总周期变化</h4>
-                                <span>
-                                    0.00 CNY
+                                <span className={state.total.change>=0?"pos":"neg"}>
+                                {state.total.change.toFixed(2)+" "+state.total.unit}
                                 </span>
                             </div>
                         </div>
                         <div className="gl_item_wrap">
                             <div className="gl_item">
                                 <h4>总周期支出</h4>
-                                <span>
-                                    0.00 CNY
+                                <span className="neg">
+                                {state.total.spend.toFixed(2)+" "+state.total.unit}
                                 </span>
                             </div>
                         </div>
                         <div className="gl_item_wrap">
                             <div className="gl_item">
                                 <h4>总周期收入</h4>
-                                <span>
-                                    0.00 CNY
+                                <span className={state.total.income>=0?"pos":"neg"}>
+                                {state.total.income.toFixed(2)+" "+state.total.unit}
                                 </span>
                             </div>
                         </div>
