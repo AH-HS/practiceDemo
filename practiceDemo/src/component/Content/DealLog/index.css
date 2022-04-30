@@ -1,0 +1,28 @@
+.deal_container{
+    width: 100%;
+    padding: 30px 10px 10px 10px;
+}
+.log_item{
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+}
+.log_item_wrap{
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+}
+.log_item_wrap>div{
+    padding: 5px;
+}
+.value{
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px
+}
+.neg{
+    color: #f14c52;
+}
+.pos{
+    color: #2dba75;
+}

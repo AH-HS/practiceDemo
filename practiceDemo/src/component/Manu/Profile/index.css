@@ -45,7 +45,7 @@
 .drap_nlist{
     max-height: 0;
     overflow: hidden;
-    /* transition: 1s ; */
+    /* transition: max-height 1s; */
 }
 .drap_list{
     position: absolute;
@@ -81,7 +81,7 @@
     right: 0;
     width: 100vw;
     height: 180%;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.6);
     opacity: .6;
     cursor: auto;
 }
