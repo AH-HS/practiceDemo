@@ -6,6 +6,7 @@ import { useContext,useState,useRef} from "react";
 import { ADD,DEL,ADD_LOG } from "../../redux/const";
 import { LogType } from "../../redux/context";
 import DealLog from "./DealLog";
+import DealInfo from "./DealInfo";
 
 const Content= ():ReactElement => {
     const {state,dispatch} = useContext(Context);
@@ -13,12 +14,14 @@ const Content= ():ReactElement => {
         console.log('点击钱包');
         console.log('context',state);
     }
+    const [selectedDeal, setselectedDeal] = useState([]);
 
     const dateSelect = (e:React.ChangeEvent)=>{
         console.log(e.target);
     }
         //是否显示添加事件面板
     const [expand, setExpand] = useState(false);
+
     const expandPanel = (e:React.MouseEvent)=>{
         e.stopPropagation();
         if(!expand){
@@ -31,35 +34,6 @@ const Content= ():ReactElement => {
             setExpand(false);
         }
     }
-    const form = useRef<HTMLDivElement>()
-    const handleFrom = (e:React.FormEvent)=>{
-        e.preventDefault()
-        //下面不用as报错
-        const from = e.target as HTMLFormElement
-        const formdata = new FormData(from); 
-        //此处应Logtype类型
-        const newLog:any={
-            "type":'',
-            "time":'',
-            "value":0,
-            "unit":'',
-            "tag":'',
-            "note":'',
-            "keepOn":false,
-            "repeat":''
-        };
-        for (const item of formdata.entries()) {
-            console.log(item);
-            // ts报错
-            newLog[item[0] as keyof LogType] = item[1];
-        }
-        dispatch({
-            type:ADD_LOG,
-            data: newLog
-        })
-        //
-        from.reset()
-    }
     return ( 
         <div className="content">
             <Display title="钱包">
@@ -70,7 +44,7 @@ const Content= ():ReactElement => {
                             <div className="count">
                                 <span>现金钱包</span>
                                 <span>现金</span>
-                                <span>1.00 CNY</span>
+                                <span className="pos">1.00 CNY</span>
                             </div>
                         </div>
                     </div>
@@ -86,57 +60,49 @@ const Content= ():ReactElement => {
                 <div className="gl">
                     <div className="datepicker">
                         <div className="datepicker_wrap">
-                            <button onClick={expandPanel}>
-                                +添加交易
-                            </button>
+                            <div className="button_warp">
+                                <button onClick={expandPanel}>
+                                    +添加交易
+                                </button>
+                            </div>
+                            <div className="handel_way hideen">
+                                <span>
+                                    删除
+                                </span>
+                                
+                            </div>
+                            <div className="handel_way hideen">
+                                <span>
+                                    编辑
+                                </span>
+                                
+                            </div>
                             <div className="dateselect">
                                 <input type="date" onChange={dateSelect} />
                             </div>
-                            <div className={expand?"deal_panel":"deal_npanel"}>
-                                <form className="panel_con" onSubmit={handleFrom} target='#'>
-                                    <div className="first_line">
-                                        <div className="input_info">
-                                            <span className="name_tag">类别</span>
-                                            <input type="text" name="type"/>
-                                        </div>
-                                        <div className="input_info">
-                                            <span className="name_tag">日期</span>
-                                            <input type="date" defaultValue="2022/04/30" name='time'/>
-                                        </div>
-                                        <div className="input_info">
-                                            <span className="name_tag">注释（可选）</span>
-                                            <input type="text" name="note"/>
-                                        </div>
-                                        <div className="input_info">
-                                            <span className="name_tag">标签（可选）</span>
-                                            <input type="text" name="tag"/>
-                                        </div>
-                                        <div className="input_info">
-                                            <span className="name_tag">金额</span>
-                                            <input type="text" name="value"/>
-                                        </div>
-                                        <div className="input_info">
-                                            <span className="name_tag">货币</span>
-                                            <input type="text" name="unit"/>
-                                        </div>
+
+                            <DealInfo expand={expand} fold={foldPanel}>
+                                <div className="second_line">
+                                    <div>
+                                        <input type="checkbox" name="keepOn"/>
+                                        打开以获得添加更多
                                     </div>
-                                    <div className="second_line">
-                                        <div>
-                                            <input type="checkbox" name="keepOn"/>
-                                            打开以获得添加更多
+                                    <div className="repeat">
+                                        <div className="input_info">
+                                            <span className="name_tag">重复（可选）</span>
+                                            <select name="repeat">
+                                                <option value="day">每日一次</option>
+                                                <option value="week">每周一次</option>
+                                                <option value="month">每月一次</option>
+                                            </select>
+                                            {/* <input type="text" name="repeat"/> */}
                                         </div>
-                                        <div className="repeat">
-                                            <div className="input_info">
-                                                <span className="name_tag">重复（可选）</span>
-                                                <input type="text" name="repeat"/>
-                                            </div>
-                                            <button type="submit">
-                                                创建交易
-                                            </button>
-                                        </div>
+                                        <button type="submit">
+                                            创建交易
+                                        </button>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </DealInfo>
                         </div>
                     </div>
                     <div className="gl_items">
@@ -173,9 +139,9 @@ const Content= ():ReactElement => {
                             </div>
                         </div>
                     </div>
-                    <div className={expand?"panel_bg":"panel_nbg"} onClick={foldPanel} />
                 </div>
             </Display>
+
             <DealLog />
         </div>
     );

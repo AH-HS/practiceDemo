@@ -1,6 +1,7 @@
 .deal_container{
     width: 100%;
     padding: 30px 10px 10px 10px;
+    position: relative;
 }
 .log_item{
     width: 100%;
@@ -12,8 +13,26 @@
     padding: 10px;
     justify-content: space-between;
 }
+.log_item_wrap>div:nth-child(2){
+    flex: 1;
+    text-align: center;
+}
+.log_item_wrap:hover{
+    cursor: pointer;
+    background-color: aliceblue;
+}
 .log_item_wrap>div{
     padding: 5px;
+
+}
+.check_wrap{
+    display: flex;
+    align-items: center;
+}
+.check_wrap>input{
+    width: 40px;
+    height: 20px;
+
 }
 .value{
     font-size: 18px;
@@ -25,4 +44,34 @@
 }
 .pos{
     color: #2dba75;
+}
+.second_line_wrap{
+    display: flex;
+    justify-content: flex-end;
+}
+.second_line_wrap>div{
+    flex: 1;
+}
+.second_line_edit{
+    display: flex;
+    padding: 5px;
+}
+.second_line_edit>button{
+    flex: 1;
+    margin: 0 5px;
+    height: 38px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+.second_line_edit>button:nth-child(1){
+    color: #7b93a4;
+    background-color: #e5ebee;
+}
+.second_line_edit>button:nth-child(2){
+    background-color: #f14c52;
+}
+.second_line_edit>button:nth-child(3){
+    background-color: #7b93a4;
 }

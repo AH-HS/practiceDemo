@@ -1,0 +1,79 @@
+.deal_npanel{
+    /* display: none; */
+    position: absolute;
+    top: 0px;
+    visibility: hidden;
+    opacity: 0;
+    width: 100%;
+    transition: .5s;
+    left: 0;
+}
+.deal_panel{
+    position: absolute;
+    display: block;
+    top: 50px;
+    border-radius: 8px;
+    width: 100%;
+    background-color: white;
+    z-index: 200;
+    transition: .5s;
+    left: 0;
+}
+.panel_con{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.first_line{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.input_info{
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    width: 17%;
+}
+.input_info>span{
+    color: #9a9a9a;
+    font-size: 14px;
+}
+.input_info>input,select{
+    height: 36px;
+    border: 1px solid #c8c8c8;
+    padding: 0 10px;
+}
+.second_line{
+    padding: 0 4px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.repeat{
+    display: flex;
+    align-items: flex-end;
+}
+.repeat .input_info{
+    width: 100%;
+    padding: 0 10px;
+}
+.repeat button{
+    width: 150px;
+    color: #7b93a4;
+    background: #e5ebee;
+    height: 38px;
+    box-shadow: none;
+}
+.panel_nbg{
+    visibility: hidden;
+}
+.panel_bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: .6;
+}
