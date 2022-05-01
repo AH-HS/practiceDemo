@@ -2,7 +2,9 @@
     max-width: 1200px;
     /* background: #000; */
     margin: 0 auto ;
+    position: relative;
 }
+
 .qb{
     width: 100%;
     display: flex;
@@ -186,7 +188,9 @@
     background-color: rgba(0, 0, 0, 0.6);
     opacity: .6;
 }
-
+.gl{
+    position: relative;
+}
 .gl_items{
     display: flex;
 }

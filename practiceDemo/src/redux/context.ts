@@ -60,8 +60,6 @@ export const InitValue:RETURNTYPE = {
 
 export const reducers = (state:RETURNTYPE,action:ACTIONTYPE):RETURNTYPE=>{
     const {type,data} = action;
-    const {total} = state;
-    console.log(total);
     switch(type){
         case ADD:
             console.log('添加一条记录data是',action.data)
@@ -72,18 +70,16 @@ export const reducers = (state:RETURNTYPE,action:ACTIONTYPE):RETURNTYPE=>{
         case ADD_LOG:
             console.log("添加一条记录");
             const newdealLog = [...state.dealLog];
-
             if(typeof data === "object"){
                 const changeValue = Number(data.value);
-                const spendValue = changeValue<0?changeValue:0;
-                const incomeValue = changeValue>0?changeValue:0;
-                const change = changeValue;
+                const spendValue = data.type==="out"?-1*changeValue:0;
+                const incomeValue = data.type==="in"?changeValue:0;
                 const newTotal = {
                     ...state.total,
-                    count:state.total.count+changeValue,
+                    count:state.total.count+spendValue+incomeValue,
                     spend:state.total.spend+spendValue,
                     income:state.total.income+incomeValue,
-                    change:state.total.change+change,
+                    change:state.total.change+spendValue+incomeValue,
                 }
                 newdealLog.push(data)
                 return {...state,total:newTotal,dealLog:newdealLog}

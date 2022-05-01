@@ -7,6 +7,7 @@ import { ADD,DEL,ADD_LOG } from "../../redux/const";
 import { LogType } from "../../redux/context";
 import DealLog from "./DealLog";
 import DealInfo from "./DealInfo";
+import "tailwindcss/tailwind.css"
 
 const Content= ():ReactElement => {
     const {state,dispatch} = useContext(Context);
@@ -14,7 +15,7 @@ const Content= ():ReactElement => {
         console.log('点击钱包');
         console.log('context',state);
     }
-    const [selectedDeal, setselectedDeal] = useState([]);
+    const [selectedDeal, setselectedDeal] = useState(new Set<number>());
 
     const dateSelect = (e:React.ChangeEvent)=>{
         console.log(e.target);
@@ -35,7 +36,7 @@ const Content= ():ReactElement => {
         }
     }
     return ( 
-        <div className="content">
+        <div className={expand?"content z-20":"content"} >
             <Display title="钱包">
                 <div className="qb">
                     <div className="qb_item" onClick={clc}>
@@ -57,7 +58,7 @@ const Content= ():ReactElement => {
                 </div>
             </Display>
             <Display title="概览">
-                <div className="gl">
+                <div className={expand?"gl z-10":"gl"}>
                     <div className="datepicker">
                         <div className="datepicker_wrap">
                             <div className="button_warp">
@@ -65,22 +66,21 @@ const Content= ():ReactElement => {
                                     +添加交易
                                 </button>
                             </div>
-                            <div className="handel_way hideen">
+                            <div className={selectedDeal.size>0?"handel_way":"handel_way hideen"}>
                                 <span>
-                                    删除
+                                    删除({selectedDeal.size})
                                 </span>
                                 
                             </div>
-                            <div className="handel_way hideen">
+                            <div className={selectedDeal.size>0?"handel_way":"handel_way hideen"}>
                                 <span>
-                                    编辑
+                                    编辑({selectedDeal.size})
                                 </span>
                                 
                             </div>
                             <div className="dateselect">
-                                <input type="date" onChange={dateSelect} />
+                                <input type="date" defaultValue="2022-05-01" onChange={dateSelect} />
                             </div>
-
                             <DealInfo expand={expand} fold={foldPanel}>
                                 <div className="second_line">
                                     <div>
@@ -141,8 +141,7 @@ const Content= ():ReactElement => {
                     </div>
                 </div>
             </Display>
-
-            <DealLog />
+            <DealLog setSelectDeal={setselectedDeal}/>
         </div>
     );
 }

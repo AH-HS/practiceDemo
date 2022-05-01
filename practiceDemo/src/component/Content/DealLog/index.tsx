@@ -5,17 +5,24 @@ import { Context } from "../../../redux/context";
 import DealInfo from "../DealInfo"
 
 interface DealLogProps {
-    
+    setSelectDeal:(set:Set<number>)=>void
 }
 
-const DealLog = (props:DealLogProps):ReactElement => {
+const DealLog = ({setSelectDeal}:DealLogProps):ReactElement => {
     const {state:data,dispatch} = useContext(Context);
 
-    const [expand, setexpand] = useState(false)
-
+    const [expand, setexpand] = useState(false);
+    const [selected, setselected] = useState(new Set<number>());
     const select = (e:React.ChangeEvent,key:number)=>{
-        const target = e.target as HTMLInputElement
-        console.log(target.checked,key,'select');
+        const target = e.target as HTMLInputElement;
+        const newSet = new Set(selected);
+        if(target.checked){
+            newSet.add(key)
+        }else{
+            newSet.delete(key)
+        }
+        setselected(newSet);
+        setSelectDeal(newSet)
     }
     const expandPanel = (e:React.MouseEvent)=>{
         e.preventDefault();
@@ -40,8 +47,8 @@ const DealLog = (props:DealLogProps):ReactElement => {
                                 <span>tag{item.tag}</span>
                             </div>
                             <div>
-                                <div className="value pos">
-                                    {item.value+" "+item.unit}
+                                <div className={item.type==="out"?"value neg":"value pos"}>
+                                    {(item.type==="out"?"-":"")+item.value+" "+item.unit}
                                 </div>
                             </div>
                         </div>

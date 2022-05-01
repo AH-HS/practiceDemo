@@ -32,7 +32,6 @@ const DealInfo= ({expand,children,fold}:DealInfoProps):ReactElement => {
             "repeat":''
         };
         for (const item of formdata.entries()) {
-            console.log(item);
             // ts报错
             newLog[item[0] as keyof LogType] = item[1];
         }
@@ -40,7 +39,6 @@ const DealInfo= ({expand,children,fold}:DealInfoProps):ReactElement => {
             type:ADD_LOG,
             data: newLog
         })
-        //
         from.reset()
     }
     return ( 

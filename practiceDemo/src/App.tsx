@@ -15,7 +15,7 @@ function App() {
   return (
       <Context.Provider value={{state,dispatch}}>
         <div className="App">
-          <div className='sticky top-0'>
+          <div className='sticky top-0 z-10'>
             <Head>
             We're launching NFTs!  🚀  Buy the  Spendee NFT  and get a VIP license  💰  click to see what's coming soon  🐷
             </Head>
