@@ -9,9 +9,11 @@ import "tailwindcss/tailwind.css"
 import {Context} from './redux/context'
 import { reducers,InitValue } from './redux/context';
 
+
+
 function App() {
   const [state, dispatch] = useReducer(reducers, InitValue)
-  
+  const [selected, setSelected] = useState<string>("1")
   return (
       <Context.Provider value={{state,dispatch}}>
         <div className="App">
@@ -19,9 +21,9 @@ function App() {
             <Head>
             We're launching NFTs!  🚀  Buy the  Spendee NFT  and get a VIP license  💰  click to see what's coming soon  🐷
             </Head>
-            <Manu />
+            <Manu cg={setSelected}/>
           </div>
-          <Content />
+          <Content display={selected}/>
         </div>
       </Context.Provider>
 

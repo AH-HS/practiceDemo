@@ -3,11 +3,12 @@ import { useState } from "react";
 import './index.css'
 
 interface SwitchProps {
+    cg:(id:string)=>void
     switchItem?:Array<string>
 }
 
 
-const Switch= ({switchItem}:SwitchProps):ReactElement => {
+const Switch= ({switchItem,cg}:SwitchProps):ReactElement => {
 
     const [selected, setselected] = useState<string>("1")
 
@@ -17,6 +18,7 @@ const Switch= ({switchItem}:SwitchProps):ReactElement => {
         if(!isSelected){
             setselected(e.currentTarget.id)
         }
+        cg(e.currentTarget.id)
     }
 
     return ( 

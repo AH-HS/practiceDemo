@@ -1,3 +1,5 @@
 export const ADD = "add"
 export const DEL = "delete"
 export const ADD_LOG = "add_log"
+export const SAVE_CHANGE = "save_change"
+export const DELETE_LOG = "delete_log"

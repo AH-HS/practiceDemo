@@ -1,4 +1,4 @@
-import { ADD, DEL ,ADD_LOG} from "./const"
+import { ADD, DEL ,ADD_LOG,SAVE_CHANGE,DELETE_LOG} from "./const"
 import { createContext } from "react"
 
 // By default, the values they receive will be the the default values 
@@ -12,7 +12,6 @@ type ValueType={
 
 export const Context = createContext({} as ValueType)
 
-
 export type LogType={
     type:string;
     time:string;
@@ -22,6 +21,8 @@ export type LogType={
     note:string;
     keepOn:false;
     repeat:string;
+    id:number;
+    [propName:string]:any
 }
 
 export type ACTIONTYPE  = {
@@ -53,6 +54,8 @@ export const InitValue:RETURNTYPE = {
     }
 }
 
+
+
 // React will pass the current state and the action to your 
 // reducer function. Your reducer will calculate and return the 
 // next state. React will store that next state, render your 
@@ -60,6 +63,7 @@ export const InitValue:RETURNTYPE = {
 
 export const reducers = (state:RETURNTYPE,action:ACTIONTYPE):RETURNTYPE=>{
     const {type,data} = action;
+    let newdealLog:Array<LogType> = []
     switch(type){
         case ADD:
             console.log('添加一条记录data是',action.data)
@@ -69,7 +73,7 @@ export const reducers = (state:RETURNTYPE,action:ACTIONTYPE):RETURNTYPE=>{
             return {...state}
         case ADD_LOG:
             console.log("添加一条记录");
-            const newdealLog = [...state.dealLog];
+            newdealLog = [...state.dealLog];
             if(typeof data === "object"){
                 const changeValue = Number(data.value);
                 const spendValue = data.type==="out"?-1*changeValue:0;
@@ -85,6 +89,16 @@ export const reducers = (state:RETURNTYPE,action:ACTIONTYPE):RETURNTYPE=>{
                 return {...state,total:newTotal,dealLog:newdealLog}
             }
             console.log("执行了")
+            return {...state,dealLog:newdealLog}
+        case SAVE_CHANGE:
+            newdealLog = [...state.dealLog];
+            const cgindex = (data as LogType).id
+            newdealLog[cgindex] = data as LogType;
+            return {...state,dealLog:newdealLog}
+        case DELETE_LOG:
+            newdealLog = [...state.dealLog];
+            const delIndex = Number(data)
+            newdealLog.splice(delIndex,1)
             return {...state,dealLog:newdealLog}
         default :
             return {...state}

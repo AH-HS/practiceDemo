@@ -5,15 +5,16 @@ import Switch from './Switch'
 import Profile from './Profile'
 
 interface ManuProps {
+    cg:(id:string)=>void
     children?:ReactElement
 }
 
-const Manu = ({children}:ManuProps):ReactElement => {
+const Manu = ({children,cg}:ManuProps):ReactElement => {
     return ( 
         <header className="manu_container">
             <img src={logo} alt="logo" />
             {children}
-            <Switch />
+            <Switch cg={cg}/>
             <Profile />
         </header>
     );
