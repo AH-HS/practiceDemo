@@ -30,6 +30,9 @@
     align-items: center;
     box-shadow: 0 5px 15px 0 rgb(48 82 120 / 10%);
 }
+.qb_item_con>img{
+    margin-right: 10px;
+}
 .create_bank{
     display: flex;
     flex: 1;

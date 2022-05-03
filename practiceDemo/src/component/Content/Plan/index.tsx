@@ -6,6 +6,7 @@ interface PlanProps {
 }
 
 const Plan= ({children}:PlanProps) => {
+
     return ( 
         <div className="plan">
             <div className="plan_content">
@@ -17,7 +18,7 @@ const Plan= ({children}:PlanProps) => {
                     <div>
                         <div className="bar_bg">
                             <div className="bar" style={{width:"60%"}}>
-                                67.0
+                                67.0%
                             </div>
                         </div>
                         <div className="date_range">
@@ -27,7 +28,10 @@ const Plan= ({children}:PlanProps) => {
                     </div>
                 </div>
             </div>
-            <div></div>
+            <div className="create_plan">
+                <span>掌控您的支出，通过预算节省资金！</span>
+                <button > 创建新的预算</button>
+            </div>
         </div>
     );
 }

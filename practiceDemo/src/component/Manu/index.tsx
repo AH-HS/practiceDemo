@@ -14,7 +14,7 @@ const Manu = ({children,cg}:ManuProps):ReactElement => {
         <header className="manu_container">
             <img src={logo} alt="logo" />
             {children}
-            <Switch cg={cg}/>
+            <Switch cg={cg} switchItem={["控制面板","预算"]}/>
             <Profile />
         </header>
     );

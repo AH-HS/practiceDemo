@@ -7,11 +7,11 @@ import DealLog from "./DealLog";
 import DealInfo from "./DealInfo";
 import "tailwindcss/tailwind.css"
 import Plan from "./Plan"
+import qb from "./img/qb.png"
 
 interface ContentProps {
     display:string
 }
-
 
 const Content= ({display}:ContentProps):ReactElement => {
     const {state,dispatch} = useContext(Context);
@@ -42,14 +42,14 @@ const Content= ({display}:ContentProps):ReactElement => {
     }
     const returnContent:(displayI:string)=>ReactElement=(display:string)=>{
         switch(display){
-            case "1":
+            case "0":
                 return (
                     <div className={expand?"content z-20":"content"} >
                     <Display title="钱包">
                         <div className="qb">
                             <div className="qb_item" onClick={clc}>
                                 <div className="qb_item_con">
-                                    <img src="#" alt=" " />
+                                    <img src={qb} alt="钱包" />
                                     <div className="count">
                                         <span>现金钱包</span>
                                         <span>现金</span>
@@ -152,12 +152,12 @@ const Content= ({display}:ContentProps):ReactElement => {
                     <DealLog setSelectDeal={setselectedDeal}/>
                 </div>
                 )
-            case "2":
+            case "1":
                 return (
                     <div className={expand?"content z-20":"content"} >
                     <Display title="预算">
                         <Plan>
-                            <div>
+                            <div className="plan_wrap">
                                 预算
                             </div>
                         </Plan>
@@ -167,7 +167,7 @@ const Content= ({display}:ContentProps):ReactElement => {
             default:
                 return (
                     <div>
-                        dsa
+                        "没有内容"
                     </div>
                 )
         }

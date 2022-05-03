@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { useState } from "react";
+import Manu from "..";
 import './index.css'
 
 interface SwitchProps {
@@ -10,7 +11,7 @@ interface SwitchProps {
 
 const Switch= ({switchItem,cg}:SwitchProps):ReactElement => {
 
-    const [selected, setselected] = useState<string>("1")
+    const [selected, setselected] = useState<string>("0")
 
     const print = (e:React.MouseEvent):void=>{
         const isSelected = e.currentTarget.id === selected;
@@ -23,12 +24,18 @@ const Switch= ({switchItem,cg}:SwitchProps):ReactElement => {
 
     return ( 
         <ul className="manu_switch">
-            {/* {switchItem.map(item=>{
-                <li>
-                    {item}
+            {switchItem&&switchItem.map<ReactElement>((item,index)=>{
+                return (
+                    <li key={"manu"+index}>
+                    <a href="#" className={selected === (index+"")?'manu_switch_link selected':'manu_switch_link'} onClick={print} id={index+""}>
+                        <span className="manu_switch_item">
+                            {item}
+                        </span>
+                    </a>
                 </li>
-            })} */}
-            <li>
+                )
+            })}
+            {/* <li>
                 <a href="#" className={selected === '1'?'manu_switch_link selected':'manu_switch_link'} onClick={print} id="1">
                     <span className="manu_switch_item">
                         控制面板
@@ -41,7 +48,7 @@ const Switch= ({switchItem,cg}:SwitchProps):ReactElement => {
                         预算
                     </span>
                 </a>
-            </li>
+            </li> */}
         </ul>
     );
 }

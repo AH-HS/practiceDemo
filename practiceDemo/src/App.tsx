@@ -13,13 +13,15 @@ import { reducers,InitValue } from './redux/context';
 
 function App() {
   const [state, dispatch] = useReducer(reducers, InitValue)
-  const [selected, setSelected] = useState<string>("1")
+  const [selected, setSelected] = useState<string>("0")
+
+
   return (
       <Context.Provider value={{state,dispatch}}>
         <div className="App">
           <div className='sticky top-0 z-10'>
             <Head>
-            We're launching NFTs!  🚀  Buy the  Spendee NFT  and get a VIP license  💰  click to see what's coming soon  🐷
+              We're launching NFTs!  🚀  Buy the  Spendee NFT  and get a VIP license  💰  click to see what's coming soon  🐷
             </Head>
             <Manu cg={setSelected}/>
           </div>

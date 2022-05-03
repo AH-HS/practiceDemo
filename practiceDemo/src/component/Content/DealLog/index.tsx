@@ -102,7 +102,7 @@ const DealLog = ({setSelectDeal}:DealLogProps):ReactElement => {
                     </div>
                 ))
             }
-            <DealInfo expand={expand} fold={fold} selected={selected} ref={ref}>
+            <DealInfo expand={expand&&data.dealLog.length>0} fold={fold} selected={selected} ref={ref}>
                 <div className="second_line_wrap">
                     <div></div>
                     <div className="second_line_edit">

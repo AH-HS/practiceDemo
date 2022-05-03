@@ -12,6 +12,14 @@ type ValueType={
 
 export const Context = createContext({} as ValueType)
 
+export type PlanType={
+    name:string,
+    count:number,
+    unit:string,
+    type:string,
+    interval:string,
+    startDate:string
+}
 export type LogType={
     type:string;
     time:string;
@@ -37,11 +45,14 @@ type STATEINFO={
     unit:string
 }
 type RETURNTYPE={
+    planLog:Array<PlanType>
     dealLog:Array<LogType>
     total:STATEINFO
 }
 
 export const InitValue:RETURNTYPE = {
+    // 预算信息
+    planLog:[],
     //交易记录信息
     dealLog:[],
     //账户状态信息
