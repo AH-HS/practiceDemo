@@ -61,7 +61,8 @@ const DealLog = ({setSelectDeal}:DealLogProps):ReactElement => {
             type:SAVE_CHANGE,
             data: newLog
         })
-        from.reset()
+        from.reset();
+        setexpand(false)
     }
     const deleteLog = (e:React.MouseEvent)=>{
         e.preventDefault();
@@ -72,7 +73,7 @@ const DealLog = ({setSelectDeal}:DealLogProps):ReactElement => {
             type:DELETE_LOG,
             data:selected+""
         })
-        
+        setexpand(false)
     }
     const cancel = (e:React.MouseEvent)=>{
         e.preventDefault();
@@ -82,15 +83,15 @@ const DealLog = ({setSelectDeal}:DealLogProps):ReactElement => {
         <div className="deal_container">
             {
                 data.dealLog.map((item,index)=>(
-                    <div className="log_item" key={"log_item"+index} >
+                    <div className="log_item" key={item.id+""} >
                         <div>{item.time}</div>
                         <div className="log_item_wrap">
                             <div className="check_wrap">
-                                <input type="checkbox" onChange={(e)=>{select(e,index)}}/>
-                                <span>{item.type}</span>
+                                <input type="checkbox" onChange={(e)=>{select(e,item.id)}}/>
+                                <span>{item.type==="in"?"收入":"支出"}</span>
                             </div>
                             <div onClick={(e)=>expandPanel(e,index)}>
-                                <span>注释{item.type}</span>
+                                <span>注释{item.note}</span>
                                 <span>tag{item.tag}</span>
                             </div>
                             <div>

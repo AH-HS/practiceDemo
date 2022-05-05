@@ -35,7 +35,7 @@ export type LogType={
 
 export type ACTIONTYPE  = {
     type:string,
-    data:string|LogType
+    data:string|LogType|Set<number>
 }
 type STATEINFO={
     count:number
@@ -74,7 +74,32 @@ export const InitValue:RETURNTYPE = {
 
 export const reducers = (state:RETURNTYPE,action:ACTIONTYPE):RETURNTYPE=>{
     const {type,data} = action;
-    let newdealLog:Array<LogType> = []
+    let newdealLog:Array<LogType> = [];
+    let newTotal = {} as STATEINFO;
+    const countTotalState = (dealLog:Array<LogType>):STATEINFO=>{
+        return  dealLog.reduce((p,c):STATEINFO=>{
+            switch (c.type) {
+                case "in":
+                    p.count+=Number(c.value);
+                    p.income+=Number(c.value);
+                    p.change+=Number(c.value)
+                    return p
+                case "out":
+                    p.count-=Number(c.value);
+                    p.spend+=Number(c.value);
+                    p.change-=Number(c.value)
+                    return p
+                default:
+                    return p
+            }
+        },{...state.total,
+            count:0,
+            spend:0,
+            income:0,
+            change:0,
+            unit:"CNY"} as STATEINFO
+            )
+    };
     switch(type){
         case ADD:
             console.log('添加一条记录data是',action.data)
@@ -86,31 +111,30 @@ export const reducers = (state:RETURNTYPE,action:ACTIONTYPE):RETURNTYPE=>{
             console.log("添加一条记录");
             newdealLog = [...state.dealLog];
             if(typeof data === "object"){
-                const changeValue = Number(data.value);
-                const spendValue = data.type==="out"?-1*changeValue:0;
-                const incomeValue = data.type==="in"?changeValue:0;
-                const newTotal = {
-                    ...state.total,
-                    count:state.total.count+spendValue+incomeValue,
-                    spend:state.total.spend+spendValue,
-                    income:state.total.income+incomeValue,
-                    change:state.total.change+spendValue+incomeValue,
-                }
-                newdealLog.push(data)
+                newdealLog.push(data as LogType)
+                newTotal = countTotalState(newdealLog);
                 return {...state,total:newTotal,dealLog:newdealLog}
             }
-            console.log("执行了")
+            console.log("执行了添加记录")
             return {...state,dealLog:newdealLog}
         case SAVE_CHANGE:
             newdealLog = [...state.dealLog];
-            const cgindex = (data as LogType).id
+            const cgindex = newdealLog.findIndex((item)=>(data as LogType).id===item.id) 
             newdealLog[cgindex] = data as LogType;
-            return {...state,dealLog:newdealLog}
+            newTotal = countTotalState(newdealLog);
+            return {...state,total:newTotal ,dealLog:newdealLog}
         case DELETE_LOG:
             newdealLog = [...state.dealLog];
-            const delIndex = Number(data)
-            newdealLog.splice(delIndex,1)
-            return {...state,dealLog:newdealLog}
+            const delIndex = Number(data);
+            if(data instanceof Set){
+                newdealLog =  newdealLog.filter((item)=>{
+                    return !data.has(item.id)
+                })
+            }else{
+                newdealLog.splice(delIndex,1);
+            }
+            newTotal = countTotalState(newdealLog);
+            return {...state,total:newTotal ,dealLog:newdealLog}
         default :
             return {...state}
     }

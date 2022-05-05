@@ -24,7 +24,7 @@ const DealInfo= forwardRef<HTMLFormElement,DealInfoProps>(({expand,children,sele
         const from = e.target as HTMLFormElement
         const formdata = new FormData(from); 
         //此处应Logtype类型
-        const newLog:any={
+        const newLog:LogType={
             "type":'',
             "time":'',
             "value":0,
@@ -33,10 +33,9 @@ const DealInfo= forwardRef<HTMLFormElement,DealInfoProps>(({expand,children,sele
             "note":'',
             "keepOn":false,
             "repeat":'',
-            "id":state.dealLog.length
+            "id":Math.random()
         };
         for (const item of formdata.entries()) {
-            // ts报错
             newLog[item[0] as keyof LogType] = item[1];
         }
         dispatch({

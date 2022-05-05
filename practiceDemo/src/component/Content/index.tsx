@@ -2,6 +2,7 @@ import React, { ReactElement  } from "react";
 import './index.css'
 import Display from "../Display";
 import { Context } from "../../redux/context";
+import { DELETE_LOG, SAVE_CHANGE } from "../../redux/const";
 import { useContext,useState,useRef} from "react";
 import DealLog from "./DealLog";
 import DealInfo from "./DealInfo";
@@ -40,6 +41,12 @@ const Content= ({display}:ContentProps):ReactElement => {
             setExpand(false);
         }
     }
+    const delLog=(e:React.MouseEvent)=>{
+        dispatch({
+            type:DELETE_LOG,
+            data:selectedDeal
+        })
+    }
     const returnContent:(displayI:string)=>ReactElement=(display:string)=>{
         switch(display){
             case "0":
@@ -74,7 +81,7 @@ const Content= ({display}:ContentProps):ReactElement => {
                                             +添加交易
                                         </button>
                                     </div>
-                                    <div className={selectedDeal.size>0?"handel_way":"handel_way hideen"}>
+                                    <div className={selectedDeal.size>0?"handel_way":"handel_way hideen"} onClick={delLog}>
                                         <span>
                                             删除({selectedDeal.size})
                                         </span>

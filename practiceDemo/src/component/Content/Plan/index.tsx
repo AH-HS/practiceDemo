@@ -17,8 +17,8 @@ const Plan= ({children}:PlanProps) => {
                     <span>321 CNY起</span>
                     <div>
                         <div className="bar_bg">
-                            <div className="bar" style={{width:"60%"}}>
-                                67.0%
+                            <div className="bar" style={{width:"1%"}}>
+                                60.0%
                             </div>
                         </div>
                         <div className="date_range">

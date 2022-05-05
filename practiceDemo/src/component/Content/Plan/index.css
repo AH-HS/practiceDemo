@@ -44,6 +44,7 @@
     border-radius: 5px;
 }
 .bar{
+    width: 0;
     height: inherit;
     background-color: #1acb82;
     border-radius: 5px;
@@ -52,6 +53,7 @@
     color: white;
     font-weight: 700;
     font-size: 16px;
+    transition: 1s;
 }
 .date_range{
     display: flex;

@@ -15,7 +15,6 @@ function App() {
   const [state, dispatch] = useReducer(reducers, InitValue)
   const [selected, setSelected] = useState<string>("0")
 
-
   return (
       <Context.Provider value={{state,dispatch}}>
         <div className="App">
