@@ -1,33 +1,35 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement , useContext,useEffect} from "react";
 import { useState } from "react";
 import Manu from "..";
+import { Context } from "../../../redux/context";
+import { CHANGW_HEAD } from "../../../redux/const";
 import './index.css'
 
 interface SwitchProps {
-    cg:(id:string)=>void
     switchItem?:Array<string>
 }
 
 
-const Switch= ({switchItem,cg}:SwitchProps):ReactElement => {
+const Switch= ({switchItem}:SwitchProps):ReactElement => {
+    const {state,dispatch} = useContext(Context);
 
-    const [selected, setselected] = useState<string>("0")
-
-    const print = (e:React.MouseEvent):void=>{
-        const isSelected = e.currentTarget.id === selected;
-        // console.log(e.currentTarget.id,e.currentTarget);
+    const print = (e:React.MouseEvent):void=>{ 
+        const isSelected = e.currentTarget.id === state.display;
         if(!isSelected){
-            setselected(e.currentTarget.id)
+            dispatch({
+                type:CHANGW_HEAD,
+                data:e.currentTarget.id
+            })
         }
-        cg(e.currentTarget.id)
     }
-
     return ( 
         <ul className="manu_switch">
             {switchItem&&switchItem.map<ReactElement>((item,index)=>{
+                const pr = state.display.slice(0,4);
+                const id = pr === "inde"?"index"+index:"info"+index;
                 return (
-                    <li key={"manu"+index}>
-                    <a href="#" className={selected === (index+"")?'manu_switch_link selected':'manu_switch_link'} onClick={print} id={index+""}>
+                    <li key={state.display+index}>
+                    <a href="#" className={state.display===id?'manu_switch_link selected':'manu_switch_link'} onClick={print} id={id}>
                         <span className="manu_switch_item">
                             {item}
                         </span>

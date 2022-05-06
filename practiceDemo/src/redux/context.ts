@@ -1,4 +1,4 @@
-import { ADD, DEL ,ADD_LOG,SAVE_CHANGE,DELETE_LOG} from "./const"
+import { ADD, DEL ,ADD_LOG,SAVE_CHANGE,DELETE_LOG,CHANGW_HEAD} from "./const"
 import { createContext } from "react"
 
 // By default, the values they receive will be the the default values 
@@ -35,7 +35,7 @@ export type LogType={
 
 export type ACTIONTYPE  = {
     type:string,
-    data:string|LogType|Set<number>
+    data:string|LogType|Set<number>|string
 }
 type STATEINFO={
     count:number
@@ -45,12 +45,15 @@ type STATEINFO={
     unit:string
 }
 type RETURNTYPE={
+    display:string
     planLog:Array<PlanType>
     dealLog:Array<LogType>
     total:STATEINFO
 }
 
 export const InitValue:RETURNTYPE = {
+    //展示信息
+    display:"index0",
     // 预算信息
     planLog:[],
     //交易记录信息
@@ -104,9 +107,8 @@ export const reducers = (state:RETURNTYPE,action:ACTIONTYPE):RETURNTYPE=>{
         case ADD:
             console.log('添加一条记录data是',action.data)
             return {...state}
-        case DEL:
-            console.log("删除一条记录data是",action.data)
-            return {...state}
+        case CHANGW_HEAD:
+            return {...state,display:data as string}
         case ADD_LOG:
             console.log("添加一条记录");
             newdealLog = [...state.dealLog];

@@ -9,8 +9,6 @@ type HeadProps = {
 
 function Head({children}:HeadProps):ReactElement{
 
-    const [val, setVal] = useState<Number|null>(0)
-
     return (
         <div className='Head_head'>
             {/* {'你好'} */}

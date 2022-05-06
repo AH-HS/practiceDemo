@@ -2,7 +2,7 @@ import React, { ReactElement  } from "react";
 import './index.css'
 import Display from "../Display";
 import { Context } from "../../redux/context";
-import { DELETE_LOG, SAVE_CHANGE } from "../../redux/const";
+import { DELETE_LOG, SAVE_CHANGE,CHANGW_HEAD } from "../../redux/const";
 import { useContext,useState,useRef} from "react";
 import DealLog from "./DealLog";
 import DealInfo from "./DealInfo";
@@ -11,15 +11,16 @@ import Plan from "./Plan"
 import qb from "./img/qb.png"
 
 interface ContentProps {
-    display:string
+    
 }
 
-const Content= ({display}:ContentProps):ReactElement => {
+const Content= ({}:ContentProps):ReactElement => {
     const {state,dispatch} = useContext(Context);
-    console.log(display);
     const clc = (e:React.MouseEvent):void=>{
-        console.log('点击钱包');
-        console.log('context',state);
+        dispatch({
+            type:CHANGW_HEAD,
+            data:"info0"
+        })
     }
     const [selectedDeal, setselectedDeal] = useState(new Set<number>());
 
@@ -28,7 +29,6 @@ const Content= ({display}:ContentProps):ReactElement => {
     }
         //是否显示添加事件面板
     const [expand, setExpand] = useState(false);
-
     const expandPanel = (e:React.MouseEvent)=>{
         e.stopPropagation();
         if(!expand){
@@ -47,9 +47,9 @@ const Content= ({display}:ContentProps):ReactElement => {
             data:selectedDeal
         })
     }
-    const returnContent:(displayI:string)=>ReactElement=(display:string)=>{
+    const returnContent:(display:string)=>ReactElement=(display:string)=>{
         switch(display){
-            case "0":
+            case "index0":
                 return (
                     <div className={expand?"content z-20":"content"} >
                     <Display title="钱包">
@@ -159,28 +159,72 @@ const Content= ({display}:ContentProps):ReactElement => {
                     <DealLog setSelectDeal={setselectedDeal}/>
                 </div>
                 )
-            case "1":
+            case "index1":
                 return (
                     <div className={expand?"content z-20":"content"} >
-                    <Display title="预算">
-                        <Plan>
-                            <div className="plan_wrap">
-                                预算
+                        <Display title="预算">
+                            <Plan>
+                                <div className="plan_wrap">
+                                    预算
+                                </div>
+                            </Plan>
+                        </Display>
+                    </div>
+                );
+            case "info0":
+                return (
+                    <div className={expand?"content z-20":"content"} >
+                        <Display title="还没写呢">
+                            <div>
+                                概览
                             </div>
-                        </Plan>
-                    </Display>
+                        </Display>
+                    </div>
+                )
+            case "info1":
+                return (
+                    <div className={expand?"content z-20":"content"} >
+                        <Display title="还没写呢">
+                            <div>
+                            交易记录
+                            </div>
+                        </Display>
+                    </div>
+                )
+            case "info2":
+                return (
+                    <div className={expand?"content z-20":"content"} >
+                        <Display title="还没写呢">
+                            <div>
+                            还没写呢不要着急
+                            </div>
+                        </Display>
+                    </div>
+                )
+            case "info3":
+                return (
+                    <div className={expand?"content z-20":"content"} >
+                        <Display title="还没写呢">
+                            <div>
+                            预算
+                            </div>
+                        </Display>
                     </div>
                 )
             default:
                 return (
-                    <div>
-                        "没有内容"
+                    <div className={expand?"content z-20":"content"} >
+                        <Display title="还没写呢">
+                            <div>
+                            还没写呢不要着急
+                            </div>
+                        </Display>
                     </div>
                 )
         }
     }
     return ( 
-        returnContent(display)
+        returnContent(state.display)
     );
 }
 export default Content;
